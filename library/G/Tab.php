@@ -229,29 +229,36 @@ class Tab
         foreach ($this->fieldArr as $field) {
             $str .= $field->toGetComment();
             $str .= $field->toGet();
-
+            $str .= "\n";
             $str .= $field->toSetComment();
             $str .= $field->toSet();
+            $str .= "\n";
         }
 
-        $str .= "\n"
-                . "    /**\n"
+        $str .= "    /**\n"
                 . "     * @return array\n"
                 . "     */\n"
                 . "    public function toArray()\n"
                 . "    {\n"
                 . "        return array(\n";
 
+        $temp = array();
+        foreach ($this->fieldArr as $field) {
+            $temp[] = strlen($field->getName());
+        }
+
+        $maxlen = max($temp);
+
         foreach ($this->fieldArr as $field) {
             $str .= "            '"
-                    . $field->getName()
+                    . str_pad($field->getName(), $maxlen, ' ')
                     . "' => \$this->"
                     . $field->toAttributeName()
                     . ",\n";
         }
 
-        $str .= "         );\n";
-        $str .= "    }\n";
+        $str .= "        );\n";
+        $str .= "    }\n\n";
 
         return $str;
     }
