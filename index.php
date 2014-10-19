@@ -21,5 +21,13 @@ foreach ($db->getTables() as $tab) {
     $tabObj = new \G\Tab($tab);
 
     var_dump($tabObj->getModelFilePath());
+
+    /*
+     * 创建输出的目录
+     */
+    if (!file_exists(dirname($tabObj->getModelFilePath()))) {
+        mkdir(dirname($tabObj->getModelFilePath()), 0777, true);
+    }
+
     file_put_contents($tabObj->getModelFilePath(), $tabObj->toModelCode());
 }
