@@ -62,6 +62,7 @@ log/
 ## 临时文件
 /tmp/
 ## 代码输出的目录
+/out/
 
 # 前端资源
 /public/static/node_modules
