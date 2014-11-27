@@ -23,6 +23,7 @@ class Db
     protected $password = '';
     protected $host     = 'localhost';
     protected $port     = 3306;
+    protected $tables   = '';
 
     /**
      *
@@ -37,6 +38,7 @@ class Db
         $this->username = Conf::get('database.username', 'root');
         $this->dbName   = Conf::get('database.dbname', 'test');
         $this->password = Conf::get('database.password');
+        $this->tables   = Conf::get('database.tables');
 
         $this->dsn = "mysql:host={$this->host};dbname={$this->dbName};port={$this->port}";
 
@@ -82,6 +84,16 @@ class Db
         $sql = 'SELECT * FROM `information_schema`.`tables` '
                 . ' WHERE '
                 . " `table_schema` = '{$this->dbName}'";
+
+        if ($this->tables) {
+            $sql .=' AND `table_name` in(';
+            $tables = array();
+            foreach (explode(',', $this->tables) as $table) {
+                $tables[] = "'{$table}'";
+            }
+
+            $sql .= implode(',', $tables) . ')';
+        }
 
         return $this->pdo->query($sql)->fetchAll();
     }
