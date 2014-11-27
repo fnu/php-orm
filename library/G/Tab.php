@@ -45,17 +45,20 @@ class Tab
      * @var array
      */
     protected $datatypeMap = array(
-        'int'       => 'Int',
-        'bigint'    => 'Int',
-        'timestamp' => 'Int',
-        'tinyint'   => 'Int',
-        'smallint'  => 'Int',
-        'char'      => 'String',
-        'varchar'   => 'String',
-        'datetime'  => 'Datetime',
-        'text'      => 'String',
-        'enum'      => 'Enum',
-        'decimal'   => 'Float',
+        'int'        => 'Int',
+        'bigint'     => 'Int',
+        'timestamp'  => 'Int',
+        'tinyint'    => 'Int',
+        'smallint'   => 'Int',
+        'char'       => 'String',
+        'varchar'    => 'String',
+        'datetime'   => 'Datetime',
+        'text'       => 'String',
+        'enum'       => 'Enum',
+        'decimal'    => 'Float',
+        'date'       => 'String',
+        'mediumtext' => 'String',
+        'time'       => 'String',
     );
 
     public function __construct($options = null)
@@ -107,18 +110,29 @@ class Tab
     {
         $name = '';
 
-        foreach (explode('_', strtolower($this->tableName)) as $item) {
+        $nameArr = explode('_', strtolower($this->tableName));
+
+        /*
+         * 如果前缀跟模块名冲突, 那么省略掉
+         */
+        if (Conf::get('orm.module.name') == ucfirst($nameArr[0])) {
+            unset($nameArr[0]);
+        }
+
+        foreach ($nameArr as $item) {
             $name .= '\\' . ucfirst($item);
         }
 
-        return '\\Orm' . $name . 'Model';
+        return '\\' . Conf::get('orm.model.namepace') . $name . 'Model';
     }
 
     public function getModelFilePath()
     {
-        $path = APPLICATION_PATH . '/out/Model/Orm/';
-        $temp = explode('_', strtolower($this->tableName));
-        $name = ucfirst(end($temp));
+        $path = Conf::get('orm.model.filepath') . Conf::get('orm.model.namepace');
+        $name = '';
+        foreach (explode('_', strtolower($this->tableName)) as $item) {
+            $name .= '/' . ucfirst($item);
+        }
 
         return $path . $name . '.php';
     }
@@ -137,6 +151,22 @@ class Tab
     }
 
     /**
+     * @return string
+     */
+    public function toNamespace()
+    {
+        $nameNode = explode('_', strtolower($this->tableName));
+        array_pop($nameNode);
+
+        $name = '';
+        foreach ($nameNode as $item) {
+            $name .= '\\' . ucfirst($item);
+        }
+
+        return "namespace Orm{$name};\n\n";
+    }
+
+    /**
      * 生成源代码
      *
      * @return string  Model的源代码
@@ -145,7 +175,7 @@ class Tab
     {
         $code = "<?php\n\n";
 
-        $code .= "namespace Orm;\n\n";
+        $code .= $this->toNamespace();
 
         $code .= "use " . \G\Conf::get('orm.model.use') . ";\n";
         $code .= "\n";
@@ -247,12 +277,12 @@ class Tab
             $temp[] = strlen($field->getName());
         }
 
-        $maxlen = max($temp);
+        $maxlen = max($temp) + 1;
 
         foreach ($this->fieldArr as $field) {
             $str .= "            '"
-                    . str_pad($field->getName(), $maxlen, ' ')
-                    . "' => \$this->"
+                    . str_pad($field->getName() . "'", $maxlen, ' ')
+                    . ' => $this->'
                     . $field->toAttributeName()
                     . ",\n";
         }
