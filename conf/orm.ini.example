@@ -1,0 +1,29 @@
+[common]
+database.host       = '172.16.2.9'
+database.port       = 3306
+database.dbname     = trade
+database.username   = dev
+database.password   = huanleguang123
+database.tables     = "trade"
+
+; 业务模块名
+orm.module.name     = Trade
+
+; 文件保存目录
+orm.mapper.filepath = /Orm/Mapper
+; 命名空间
+orm.mapper.namepace = \Orm\Mapper
+; 继承
+orm.mapper.extend   = AbstractModel
+; 引用
+orm.mapper.use      = Orm\Base\MapperAbstract
+
+
+orm.model.filepath  = APPLICATION_PATH "/out/Model/"
+orm.model.namepace  = Orm
+orm.model.use       = Orm\Base\Model\AbstractModel
+orm.model.extend    = AbstractModel
+
+[product : common]
+
+[develop : product]
