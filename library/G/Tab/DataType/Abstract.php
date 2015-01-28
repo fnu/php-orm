@@ -16,6 +16,7 @@ abstract class DataType_Abstract
     const FLOAT     = 'float';
     const TINYINT   = 'tinyint';
     const SMALLINT  = 'smallint';
+    const LONGTEXT  = 'longtext';
 
     /**
      * 备注

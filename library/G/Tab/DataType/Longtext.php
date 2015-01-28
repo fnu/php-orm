@@ -9,12 +9,12 @@ use \G\Tab\DataType_Abstract;
  *
  * @author ghost
  */
-class String extends DataType_Abstract
+class Longtext extends DataType_Abstract
 {
 
     public function getTypeName()
     {
-        return DataType_Abstract::VARCHAR;
+        return DataType_Abstract::INT;
     }
 
     public function getPhpType()

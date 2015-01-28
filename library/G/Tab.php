@@ -59,6 +59,7 @@ class Tab
         'date'       => 'String',
         'mediumtext' => 'String',
         'time'       => 'String',
+        'longtext'   => 'Longtext',
     );
 
     public function __construct($options = null)
