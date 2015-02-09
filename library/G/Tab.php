@@ -47,7 +47,7 @@ class Tab
     protected $datatypeMap = array(
         'int'        => 'Int',
         'bigint'     => 'Int',
-        'timestamp'  => 'Int',
+        'timestamp'  => 'Timestamp',
         'tinyint'    => 'Int',
         'smallint'   => 'Int',
         'char'       => 'String',
