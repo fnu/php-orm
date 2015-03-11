@@ -103,6 +103,7 @@ abstract class DataType_Abstract
         $this->setComments($columnData['column_comment']);
         $this->setTableName($columnData['table_name']);
         $this->parseColumnType($columnData['column_type']);
+        $this->setDefault($columnData['column_default']);
     }
 
     /**
@@ -219,7 +220,7 @@ abstract class DataType_Abstract
             $name .= '\\' . ucfirst($item);
         }
 
-        return '\\Orm' . $name . 'Model';
+        return '\\Orm\\Sms' . $name . 'Model';
     }
 
     /**
@@ -303,6 +304,15 @@ abstract class DataType_Abstract
                 . '     */' . "\n";
 
         return $str;
+    }
+
+    /**
+     * 解析成PHP格式的值
+     * @return null|string|float|int
+     */
+    public function toPhpValue()
+    {
+        return 'null';
     }
 
 }

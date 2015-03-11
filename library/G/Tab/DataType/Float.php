@@ -33,4 +33,13 @@ class Float extends DataType_Abstract
         $this->columnType = $colunType;
     }
 
+    public function toPhpValue()
+    {
+        if (null === $this->getDefault()) {
+            return parent::toPhpValue();
+        }
+
+        return floatval($this->getDefault());
+    }
+
 }

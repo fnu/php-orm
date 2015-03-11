@@ -219,7 +219,8 @@ class Tab
     {
         $str = "\n"
                 . $field->toAttributeComment()
-                . '    protected $' . $field->toAttributeName() . " = null;\n";
+                . '    protected $' . $field->toAttributeName() . " = "
+                . $field->toPhpValue() . ";\n";
 
         return $str;
     }

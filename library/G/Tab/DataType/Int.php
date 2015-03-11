@@ -38,4 +38,13 @@ class Int extends DataType_Abstract
         $this->columnType = $colunType;
     }
 
+    public function toPhpValue()
+    {
+        if (null === $this->getDefault()) {
+            return parent::toPhpValue();
+        }
+
+        return intval($this->getDefault());
+    }
+
 }
