@@ -220,7 +220,7 @@ abstract class DataType_Abstract
             $name .= '\\' . ucfirst($item);
         }
 
-        return '\\Orm\\Sms' . $name . 'Model';
+        return '\\Orm' . $name . 'Model';
     }
 
     /**
