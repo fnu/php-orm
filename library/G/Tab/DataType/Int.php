@@ -25,7 +25,7 @@ class Int extends DataType_Abstract
     protected function toSetFunc()
     {
         $name = $this->toAttributeName();
-        return 'intval($' . $name . ')';
+        return (false !== strpos($this->columnType, 'unsigned')) ? 'abs(intval($' . $name . '))' : 'intval($' . $name . ')';
     }
 
     /**
