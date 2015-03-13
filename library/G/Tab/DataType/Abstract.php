@@ -300,7 +300,7 @@ abstract class DataType_Abstract
                 . '    /**' . "\n"
                 . '     * ' . $this->getComments() . "\n"
                 . '     *' . "\n"
-                . '     * @var ' . $this->getPhpType() . ' $' . $this->toAttributeName() . "\n"
+                . '     * @var ' . $this->getPhpType() . "\n"
                 . '     */' . "\n";
 
         return $str;
