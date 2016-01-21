@@ -9,12 +9,12 @@ use \G\Tab\DataType_Abstract;
  *
  * @author ghost
  */
-class Int extends DataType_Abstract
+class Mediumint extends DataType_Abstract
 {
 
     public function getTypeName()
     {
-        return DataType_Abstract::INT;
+        return DataType_Abstract::MEDIUMINT;
     }
 
     public function getPhpType()

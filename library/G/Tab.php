@@ -45,13 +45,14 @@ class Tab
      * @var array
      */
     protected $datatypeMap = array(
-        'int'        => 'Int',
-        'bigint'     => 'Int',
+        'int'        => 'Intv',
+        'bigint'     => 'Intv',
+        'mediumint'  => 'Mediumint',
         'timestamp'  => 'Timestamp',
-        'tinyint'    => 'Int',
-        'smallint'   => 'Int',
-        'char'       => 'String',
-        'varchar'    => 'String',
+        'tinyint'    => 'Intv',
+        'smallint'   => 'Intv',
+        'char'       => 'Str',
+        'varchar'    => 'Str',
         'datetime'   => 'Datetime',
         'text'       => 'String',
         'enum'       => 'Enum',
@@ -272,7 +273,7 @@ class Tab
                 . "     */\n"
                 . "    public function toArray()\n"
                 . "    {\n"
-                . "        return array(\n";
+                . "        return [\n";
 
         $temp = array();
         foreach ($this->fieldArr as $field) {
@@ -289,7 +290,7 @@ class Tab
                     . ",\n";
         }
 
-        $str .= "        );\n";
+        $str .= "        ];\n";
         $str .= "    }\n\n";
 
         return $str;

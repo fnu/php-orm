@@ -5,6 +5,7 @@ namespace G\Tab;
 abstract class DataType_Abstract
 {
 
+    const MEDIUMINT = 'mediumint';
     const INT       = 'int';
     const BIGINT    = 'bigint';
     const CHAR      = 'char';
@@ -288,10 +289,23 @@ abstract class DataType_Abstract
                 . '     * database: ' . $this->columnType . "\n"
                 . '     * @param ' . $this->getPhpType() . ' $' . $this->toAttributeName()
                 . ' ' . $this->getComments() . "\n"
-                . "     * @return {$this->getModelName()}\n"
+                . "     * @return {$this->getBaseModelName()}\n"
                 . '     */' . "\n";
 
         return $str;
+    }
+
+    /**
+     * Model的名称, 带有全名空间
+     *
+     * @return string
+     */
+    public function getBaseModelName()
+    {
+        $temp = explode('_', strtolower($this->tableName));
+        $name = ucfirst(end($temp));
+
+        return $name . 'Model';
     }
 
     public function toAttributeComment()

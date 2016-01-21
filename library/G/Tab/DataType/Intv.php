@@ -9,25 +9,30 @@ use \G\Tab\DataType_Abstract;
  *
  * @author ghost
  */
-class String extends DataType_Abstract
+class Intv extends DataType_Abstract
 {
 
     public function getTypeName()
     {
-        return DataType_Abstract::VARCHAR;
+        return DataType_Abstract::INT;
     }
 
     public function getPhpType()
     {
-        return 'String';
+        return 'Int';
     }
 
     protected function toSetFunc()
     {
         $name = $this->toAttributeName();
-        return 'trim($' . $name . ')';
+        return (false !== strpos($this->columnType, 'unsigned')) ? 'abs(intval($' . $name . '))' : 'intval($' . $name . ')';
     }
 
+    /**
+     * 目前只是简单的记录一下而已
+     *
+     * @param string $colunType
+     */
     public function parseColumnType($colunType)
     {
         $this->columnType = $colunType;
@@ -39,7 +44,7 @@ class String extends DataType_Abstract
             return parent::toPhpValue();
         }
 
-        return "'{$this->getDefault()}'";
+        return intval($this->getDefault());
     }
 
 }
