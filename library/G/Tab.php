@@ -54,12 +54,12 @@ class Tab
         'char'       => 'Str',
         'varchar'    => 'Str',
         'datetime'   => 'Datetime',
-        'text'       => 'String',
+        'text'       => 'Str',
         'enum'       => 'Enum',
         'decimal'    => 'Float',
-        'date'       => 'String',
-        'mediumtext' => 'String',
-        'time'       => 'String',
+        'date'       => 'Str',
+        'mediumtext' => 'Str',
+        'time'       => 'Str',
         'longtext'   => 'Longtext',
     );
 
