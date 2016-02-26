@@ -9,7 +9,7 @@ use \G\Tab\DataType_Abstract;
  *
  * @author ghost
  */
-class Float extends DataType_Abstract
+class Floatv extends DataType_Abstract
 {
 
     public function getTypeName()

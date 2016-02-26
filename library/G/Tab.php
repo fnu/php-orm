@@ -56,7 +56,7 @@ class Tab
         'datetime'   => 'Datetime',
         'text'       => 'Str',
         'enum'       => 'Enum',
-        'decimal'    => 'Float',
+        'decimal'    => 'Floatv',
         'date'       => 'Str',
         'mediumtext' => 'Str',
         'time'       => 'Str',
