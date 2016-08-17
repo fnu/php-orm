@@ -165,7 +165,12 @@ class Tab
             $name .= '\\' . ucfirst($item);
         }
 
-        return "namespace Orm{$name};\n\n";
+        $namespace = 'namespace Orm';
+        if (Conf::get('orm.module.name')) {
+            $namespace .= '\\' . Conf::get('orm.module.name');
+        }
+
+        return $namespace . "{$name};\n\n";
     }
 
     /**
